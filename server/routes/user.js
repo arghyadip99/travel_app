@@ -16,6 +16,24 @@ router.get("/:userId/trips", async (req, res) => {
   }
 })
 
+/* GET SPECIFIC TRIP */
+router.get("/:userId/trips/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+    console.log(req.params)
+    const trip = await Booking.findById({_id:id}).populate("customerId hostId listingId")
+    
+    if (!trip) {
+      return res.status(404).json({ message: "Trip not found!" })
+    }
+
+    res.status(200).json(trip)
+  } catch (err) {
+    console.log(err)
+    res.status(404).json({ message: "Can not find the trip!", error: err.message })
+  }
+})
+
 /* ADD LISTING TO WISHLIST */
 router.patch("/:userId/:listingId", async (req, res) => {
   try {

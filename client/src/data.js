@@ -8,6 +8,8 @@ import {
   GiForestCamp,
   GiIsland,
   GiWindmill,
+  GiForest,
+  GiTreehouse
 } from "react-icons/gi";
 import {
   FaSkiing,
@@ -74,12 +76,6 @@ export const categories = [
     description: "This property is in the countryside!",
   },
   {
-    img: "assets/pool_cat.jpg",
-    label: "Amazing Pools",
-    icon: <TbPool />,
-    description: "This is property has a beautiful pool!",
-  },
-  {
     img: "assets/island_cat.webp",
     label: "Islands",
     icon: <GiIsland />,
@@ -138,6 +134,18 @@ export const categories = [
     label: "Luxury",
     icon: <IoDiamond />,
     description: "This property is brand new and luxurious!",
+  },
+  {
+    img: "assets/lux_cat.jpg",
+    label: "Forest",
+    icon: <GiForest />,
+    description: "This property is a deep dense forest",
+  },
+  {
+    img: "assets/lux_cat.jpg",
+    label: "Tree House",
+    icon: <GiTreehouse />,
+    description: "This property is a deep dense forest",
   },
 ];
 

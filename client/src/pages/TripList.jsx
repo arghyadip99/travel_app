@@ -4,7 +4,8 @@ import Loader from "../components/Loader";
 import Navbar from "../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { setTripList } from "../redux/state";
-import ListingCard from "../components/ListingCard";
+// import ListingCard from "../components/ListingCard";
+import BookingCard from "../components/Booking";
 import Footer from "../components/Footer"
 
 const TripList = () => {
@@ -24,6 +25,7 @@ const TripList = () => {
       );
 
       const data = await response.json();
+      console.log(data)
       dispatch(setTripList(data));
       setLoading(false);
     } catch (err) {
@@ -42,11 +44,12 @@ const TripList = () => {
       <Navbar />
       <h1 className="title-list">Your Trip List</h1>
       <div className="list">
-        {tripList?.map(({ listingId, hostId, startDate, endDate, totalPrice, booking=true }) => (
-          <ListingCard
+        {tripList?.map(({ _id, listingId, hostId, startDate, endDate, totalPrice, booking=true }) => (
+          <BookingCard
+            bookingId={_id}
             listingId={listingId._id}
             creator={hostId._id}
-            listingPhotoPaths={listingId.listingPhotoPaths}
+            bookingPhotoPaths={listingId.listingPhotoPaths}
             city={listingId.city}
             province={listingId.province}
             country={listingId.country}

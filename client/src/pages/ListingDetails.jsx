@@ -64,7 +64,7 @@ const ListingDetails = () => {
 
   const navigate = useNavigate()
 
-  const handleSubmit = async () => {
+  const handleCreateSubmit = async () => {
     try {
       const bookingForm = {
         customerId,
@@ -77,6 +77,33 @@ const ListingDetails = () => {
 
       const response = await fetch("http://localhost:3001/bookings/create", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingForm)
+      })
+
+      if (response.ok) {
+        navigate(`/${customerId}/trips`)
+      }
+    } catch (err) {
+      console.log("Submit Booking Failed.", err.message)
+    }
+  }
+
+  const handleEditSubmit = async () => {
+    try {
+      const bookingForm = {
+        customerId,
+        listingId,
+        hostId: listing.creator._id,
+        startDate: dateRange[0].startDate.toDateString(),
+        endDate: dateRange[0].endDate.toDateString(),
+        totalPrice: listing.price * dayCount,
+      }
+
+      const response = await fetch(`http://localhost:3001/bookings/update/${listingId}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
@@ -179,7 +206,7 @@ const ListingDetails = () => {
               <p>Start Date: {dateRange[0].startDate.toDateString()}</p>
               <p>End Date: {dateRange[0].endDate.toDateString()}</p>
 
-              <button className="button" type="submit" onClick={handleSubmit}>
+              <button className="button" type="submit" onClick={handleCreateSubmit}>
                 BOOKING
               </button>
             </div>
